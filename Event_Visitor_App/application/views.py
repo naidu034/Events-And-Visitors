@@ -6,23 +6,19 @@ from .models import *
 
 
 
-@login_required
 def home(request):
     return render(request, 'application/home.html')
 
-@login_required
+
 def event(request):
     return render(request, 'application/event.html')
 
-@login_required
 def events(request):
     return render(request, 'application/events.html')
 
-@login_required
 def visitor(request):
     return render(request, 'application/visitor.html')
 
-@login_required
 def visitors(request):
     return render(request, 'application/visitors.html')
 
