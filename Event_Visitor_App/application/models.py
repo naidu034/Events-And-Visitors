@@ -1,11 +1,10 @@
 from django.db import models
 from django.utils.timezone import now
-
 # Create your models here.
 
 
 class Visitor(models.Model):
-    datetime = models.DateTimeField(default=now, editable=False)
+    datetime = models.DateTimeField(default=now)
     visitorname = models.CharField(max_length=50)
     tomeet = models.CharField(max_length=50)
     department = models.CharField(max_length=50)
@@ -20,7 +19,7 @@ class Visitor(models.Model):
         return self.visitorname
 
 class Event(models.Model):
-    datetime = models.DateTimeField(default=now, editable=False)
+    datetime = models.DateTimeField(default=now)
     organsier = models.CharField(max_length=50)
     attendees = models.TextField()
     department = models.CharField(max_length=50)

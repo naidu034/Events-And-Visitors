@@ -3,9 +3,67 @@
 {% block title %} Home {% endblock %}
 {% block body %}
 {% load static %}
-<div style="padding: 1%;">
-    <h2 class="h2" style="color:aqua">event</h2>
+<script>
 
+function display_c(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('display_ct()',refresh)
+}
 
+function display_ct() {
+var x = new Date()
+document.getElementById("datetime")  = x;
+display_c();
+ }
+display_c()
+</script>
+<div style="margin:5%; padding:10px; background-color:rgba(253, 253, 253, 0.3);border:4px solid;border-radius:5px; border-color:grey;">
+    <h4 style="color:black;font-family: 'Black Ops One';">Enter Event/Meeting Details:</h4><br>
+    <div class="form-outline">
+        <form action="/event/" method="post">
+            {% csrf_token %}
+<div class="row" >
+    <div class="column"><label for="datetime" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Date,Time:</h6></label><br>
+    <input type="datetime-local" id="datetime" name="datetime" style="border:1px solid;"class="form-control" value="display_c()"><br>
+    <label for="organiser" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Organiser:</h6></label><br>
+    <input type="text"  style="border:1px solid;" name="organsier" id="organiser" class="form-control"><br>
+    <label for="attendees" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Attendees:</h6></label><br>
+    <textarea class="form-control" style="border:1px solid;" name="attendees" id="attendees" rows="4" columns="4"></textarea><br>
+    <label for="feedback" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Feedback:</h6></label><br>
+    <textarea class="form-control" style="border:1px solid;" name="feedback" id="feedback" rows="4" columns="4"></textarea><br>
+    </div>
+    <div class="column"><label for="department" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Department:</h6></label><br>
+    <input type="text" style="border:1px solid;" name="department" id="department" class="form-control"><br>
+    <label for="purpose" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Purpose:</h6></label><br>
+    <textarea class="form-control" style="border:1px solid;" name="purpose" id="purpose" rows="4" columns="4"></textarea><br>
+    <label for="summary" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Summary:</h6></label><br>
+    <textarea class="form-control" style="border:1px solid;" name="summary" id="summary" rows="4" columns="4"></textarea><br>
+    </div>
+<div class="container my-3" style="font-family: 'Black Ops One'; color:black;">
+    {% if messages %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endif %}
 </div>
+</div>
+
+<div class="form-group" style="float:right" >
+<input type="submit" name="submit" class="btn btn-info btn-md" value="Submit" style="margin:0% 50% 0 0%;font-family: 'Black Ops One';background-color:white;color:black;">
+ </div></form>
+    </div>
+<br><br>
+    </div>
+
+{% endblock %}
+{% block css %}
+    .column {
+  float: left;
+  width: 50%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 {% endblock %}

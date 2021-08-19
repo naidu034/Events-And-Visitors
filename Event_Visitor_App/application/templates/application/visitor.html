@@ -3,16 +3,69 @@
 {% block title %} Home {% endblock %}
 {% block body %}
 {% load static %}
-<div style="margin:10% 25% 0 25%; padding:10px; background-color:rgba(253, 253, 253, 0.3);border:1px solid;border-radius:5px;">
-    <h4 style="color:black;font-family: 'Black Ops One';margin:0 0 0 5%;">Select a option:</h4>
-    <input type="text" id="currentDateTime">
-<br><br>
 <script>
-  var today = new Date();
-var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-var dateTime = date+' '+time;
-  document.getElementById("currentDateTime").value = dateTime;
+
+function display_c(){
+var refresh=1000; // Refresh rate in milli seconds
+mytime=setTimeout('display_ct()',refresh)
+}
+
+function display_ct() {
+var x = new Date()
+document.getElementById("currentDateTime").innerHTML  = x;
+display_c();
+ }
+display_c();
 </script>
+<div style="margin:5%; padding:10px; background-color:rgba(253, 253, 253, 0.3);border:1px solid;border-radius:5px;">
+    <h4 style="color:black;font-family: 'Black Ops One';">Enter Visitor Details:</h4><br>
+    <div class="form-outline">
+        <form action="/visitor/" method="post">
+            {% csrf_token %}
+<div class="row" >
+    <div class="column"><label for="currentDateTime" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Date,Time:</h6></label><br>
+    <span id='currentDateTime' class="form-control" style="color:black;"></span><br>
+    <label for="visitor" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Visitor name::</h6></label><br>
+    <input type="text"  style="" name="visitor" id="visitor" class="form-control"><br>
+    <label for="address" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Address:</h6></label><br>
+    <textarea class="form-control" name="address" id="address" rows="4" columns="4"></textarea><br>
+    <label for="mobile" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Mobile no:</h6></label><br>
+    <input type="number" name="mobile" id="mobile"style=""class="form-control"><br></div>
+
+    <div class="column"><label for="tomeet" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Whom to meet:</h6></label><br>
+    <input type="text"  style="" name="tomeet" id="tomeet" class="form-control"><br>
+    <label for="department" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Department:</h6></label><br>
+    <input type="text"  name="department" id="department" class="form-control"><br>
+    <label for="purpose" class="text-info" ><h6 style="font-family: 'Black Ops One'; color:black;">Purpose:</h6></label><br>
+    <textarea class="form-control" name="purpose" id="purpose" rows="4" columns="4"></textarea><br></div>
+<div class="container my-3" style="font-family: 'Black Ops One'; color:black;">
+    {% if messages %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endif %}
+</div>
+</div>
+<div class="form-group" style="float:right">
+<input type="submit" name="submit" class="btn btn-info btn-md" value="Submit" style="margin:0% 50% 0 0%;font-family: 'Black Ops One';background-color:white;color:black;">
+ </div>
+        </form>
     </div>
+<br><br>
+
+    </div>
+
 {% endblock %}
+{% block css %}
+    .column {
+  float: left;
+  width: 50%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+{% endblock %}
+
+
